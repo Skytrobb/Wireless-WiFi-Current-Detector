@@ -21,12 +21,12 @@ https://learn.adafruit.com/adafruit-huzzah-esp8266-breakout/using-arduino-ide
 you will need a split-core non-invasive current detector and design a circuit that meets your needs as seen here:
 
 https://learn.openenergymonitor.org/electricity-monitoring/ct-sensors/interface-with-arduino?redirected=true
-*Example: my circuit was designed to detect current from 0-10A so I needed a 220 ohm burden resistor.
+* Example: my circuit was designed to detect current from 0-10A so I needed a 220 ohm burden resistor.
 
 
 ## Deployment
 
-* Clip your split-core transformer to any wire with alternating current. You must separate ground from neutral and clip to only one wire or the two current will cancel out
+* Clip your split-core transformer to any wire with alternating current. You must separate ground from neutral and clip to only one wire or the two currents will cancel out
 * to find calibration factor for the energy monitor function use this function Rated Current/(AREF/2).
 * Example: my circuit is rated to measure 10A max and my nodeMCU uses a 3.3v ADC. 10/(3.3/2) - 6.06
 
