@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+    <div class="title-container">
+        <h1>Current Detection</h1>
+    </div>
+    <div class="button-container">
+        <br /><br />
+        <a href="LIGHT.ON.html"><button id="buttons">On</button></a>
+        <a href="LIGHT.OFF.html"><button id="buttons">Off</button></a>
+         
+    </div>
+	<!-- <p>Detected Current: </p> -->
+	 <p id="demo"></p> 
+<script>
+	var dataArray = [];
+	var MaxReadings = 101;
+
+
+	setInterval(function() {GetADC();}, 1000);
+	function GetADC() {
+	  var xhttp = new XMLHttpRequest();
+          var adc=0;
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+		adc = Number(this.responseText);
+	      	 {			
+			console.log(adc)
+	     document.getElementById("demo").innerHTML = adc
+
+			dataArray.push(adc);
+			google.charts.setOnLoadCallback(drawAxisTickColors);
+			while(dataArray.length > MaxReadings) {
+			dataArray.shift();
+			}
+	    }
+	  };
+	  xhttp.open("GET", "/getADC", false);
+	  xhttp.send();
+	}
+	
+	
+google.charts.load('current', {packages: ['corechart', 'line']});
+
+
+function drawAxisTickColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', '');
+
+	  for(i = 0; i<dataArray.length;i++){
+      data.addRow([i,dataArray[i]]);
+      }
+
+      var options = {
+        hAxis: {
+          title: 'Time (10s)',
+          textStyle: {
+            color: '#01579b',
+            fontSize: 20,
+            fontName: 'Arial',
+            bold: true,
+            italic: true,
+			ticks: [0,10,20,30,40,50,60,70]
+          },
+          titleTextStyle: {
+            color: '#01579b',
+            fontSize: 16,
+            fontName: 'Arial',
+            bold: false,
+            italic: true
+          }
+        },
+        vAxis: {
+          title: 'Current (mA)',
+          textStyle: {
+            color: '#1a237e',
+            fontSize: 12,
+            bold: false
+          },
+          titleTextStyle: {
+            color: '#1a237e',
+            fontSize: 24,
+            bold: true
+          }
+        },
+        colors: ['#a52714', '#097138']
+      };
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+</script>
+<div id="chart_div"></div>
+</body>
+</html>
+
