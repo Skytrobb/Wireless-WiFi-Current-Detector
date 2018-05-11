@@ -26,9 +26,9 @@ https://learn.openenergymonitor.org/electricity-monitoring/ct-sensors/interface-
 
 ## Deployment
 
-*Clip your split-core transformer to any wire with alternating current. You must separate ground from neutral and clip to only one wire or the two current will cancel out
-*to find calibration factor for the energy monitor function use this function Rated Current/(AREF/2).
-*Example: my circuit is rated to measure 10A max and my nodeMCU uses a 3.3v ADC. 10/(3.3/2) - 6.06
+* Clip your split-core transformer to any wire with alternating current. You must separate ground from neutral and clip to only one wire or the two current will cancel out
+* to find calibration factor for the energy monitor function use this function Rated Current/(AREF/2).
+* Example: my circuit is rated to measure 10A max and my nodeMCU uses a 3.3v ADC. 10/(3.3/2) - 6.06
 
 
 ## Authors
